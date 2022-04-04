@@ -31,24 +31,25 @@ void print_matrix(int [,] local_matrix)  // красивая печать мат
     }    
 }
 
-void print_array(int [] local_array)  // красивая печать одномерного массива
+void print_array(double [] local_array)  // красивая печать одномерного массива
 {
   Console.Write("[");
   for(int i=0;i<local_array.Length - 1;i++)
   {
-      Console.Write($"{local_array[i],5},");
+      Console.Write($"{local_array[i]:f2}; ");
   }
-  Console.WriteLine($"{local_array[local_array.Length - 1 ],5}]");
+  Console.WriteLine($"{local_array[local_array.Length - 1 ]:f2}]");
 }
 
-int [] GetAve(int [,] local_matrix)  // считаем среднее значение элементов столбцов в матрице
+double [] GetAve(int [,] local_matrix)  // считаем среднее значение элементов столбцов в матрице
 {
-    int [] ret = new int [size_w];
+    double [] ret = new double [size_w];
     for(int j=0;j<size_w;j++) // двигаемся сначала по строке
     {
         ret[j] = 0;
         for(int i = 0;i<size_h;i++) // а тут пробегаемся по столбцу
             ret[j] += local_matrix[i,j];
+        ret[j] /= size_h;    
     }
     return ret;
 }
@@ -56,6 +57,6 @@ int [] GetAve(int [,] local_matrix)  // считаем среднее значе
 int [,] matrix = new int [size_h,size_w];  // объявление матрицы
 init_matrix(matrix);
 print_matrix(matrix);
-int [] ave = GetAve(matrix);  // объявление массива и расчет в него среднего по столбцам матрицы
+double [] ave = GetAve(matrix);  // объявление массива и расчет в него среднего по столбцам матрицы
 Console.WriteLine();
 print_array(ave);
